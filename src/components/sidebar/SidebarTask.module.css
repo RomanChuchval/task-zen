@@ -1,0 +1,24 @@
+.sidebar_task_wrapper {
+    padding: 15px;
+    border: 1px solid #b0b4c0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0 4px 8px -2px, rgba(9, 30, 66, 0.08) 0 0 0 1px;
+    background-color: white;
+    transition: 0.3s;
+}
+
+.sidebar_task_wrapper:hover{
+    background-color: rgb(229, 229, 229);
+    cursor: pointer;
+}
+
+.sidebar_task_description{
+    font-size: 13px;
+}
+
+.sidebar_task_status {
+    font-size: 13px;
+}
