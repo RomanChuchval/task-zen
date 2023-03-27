@@ -3,9 +3,21 @@ import s from './Sidebar.module.css'
 import Search from "antd/es/input/Search";
 import {Badge, Button} from "antd";
 import {SidebarTask} from "./SidebarTask";
+import {useSelector} from "react-redux";
+import {AppRootType} from "../../redux/store";
+import {TaskListType} from "../../redux/reducers/task-list-reducer";
 
 
 export const Sidebar = () => {
+
+    const taskLists = useSelector<AppRootType, Array<TaskListType>>(state => state.taskLists)
+
+    const sidebarTasksLists = taskLists.map(tl => {
+        return (
+            <SidebarTask taskList={tl}/>
+        )
+    })
+
     return (
         <div className={s.sidebar_wrapper}>
             <div className={s.sidebar_title}>
@@ -13,7 +25,6 @@ export const Sidebar = () => {
                     Add New TasksList
                 </Button>
             </div>
-
             <div className={s.sidebar_search}>
                 <Search size='large' style={{width: '95%'}} placeholder="search task" enterButton={'Search'}/>
             </div>
@@ -40,14 +51,7 @@ export const Sidebar = () => {
                 </Badge>
             </div>
             <div className={s.sidebar_tasks_wrapper}>
-                <SidebarTask/>
-                <SidebarTask/>
-                <SidebarTask/>
-                <SidebarTask/>
-                <SidebarTask/>
-                <SidebarTask/>
-                <SidebarTask/>
-                <SidebarTask/>
+                {sidebarTasksLists}
             </div>
         </div>
     );

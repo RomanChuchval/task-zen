@@ -1,6 +1,8 @@
 .main_wrapper {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
     background-color: #ffffff;
     border-radius: 15px;
     box-shadow: rgba(9, 30, 66, 0.25) 0 4px 8px -2px, rgba(9, 30, 66, 0.08) 0 0 0 1px;
@@ -8,17 +10,63 @@
 
 .main_header {
     padding: 0 10px;
-    width: 100%;
     height: 50px;
     border-bottom: 1px solid #b0b4c0;
     display: flex;
     align-items: center;
+    font-size: 20px;
+    font-weight: 500;
 }
 
-.add_new_task_btn {
-    height: 60px;
-    padding: 20px;
+.main_title {
+    height: 50px;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
+    justify-content: space-evenly;
+    font-size: 18px;
+}
+
+.main_settings {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-bottom: 1px solid #b0b4c0;
+}
+
+.main_tasks_wrapper {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+}
+
+.main_tasks {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tasks_list_header {
+    height: 50px;
+    padding: 15px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.tasks_list {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    overflow: auto;
+}
+
+.main_tasks_stats {
+    width: 25%;
+    height: 100vh;
+    border-left: 1px solid #b0b4c0;
+
 }
