@@ -1,5 +1,6 @@
 .sidebar_task_wrapper {
-    padding: 15px;
+    width: 100%;
+    min-height: 90px;
     border: 1px solid #b0b4c0;
     border-radius: 10px;
     display: flex;
@@ -7,18 +8,37 @@
     gap: 10px;
     box-shadow: rgba(9, 30, 66, 0.25) 0 4px 8px -2px, rgba(9, 30, 66, 0.08) 0 0 0 1px;
     background-color: white;
-    transition: 0.4s;
+    transition: 0.3s;
+    position: relative;
 }
 
-.sidebar_task_wrapper:hover{
+.sidebar_task_wrapper_active {
+    border: 1px solid #0963c4;
+    box-shadow: rgba(9, 30, 66, 0.25) 0 4px 8px -2px, rgba(9, 30, 66, 0.08) 0 0 0 1px;
+    background-color: #b3d0ff;
+}
+
+.sidebar_task_wrapper_active:not(:focus):hover {
+    background-color: #b3d0ff;
+}
+
+.navLink {
+    min-height: 50px;
+    padding: 15px 15px 45px 15px;
+}
+
+.sidebar_task_wrapper:hover {
     background-color: rgb(229, 229, 229);
     cursor: pointer;
 }
-
-.sidebar_task_description{
+.sidebar_task_description {
     font-size: 13px;
 }
 
 .sidebar_task_status {
     font-size: 13px;
+    width: min-content;
+    position: absolute;
+    bottom: 8px;
+    left: 10px;
 }

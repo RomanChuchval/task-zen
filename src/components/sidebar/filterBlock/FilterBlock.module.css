@@ -1,0 +1,6 @@
+.sidebar_filter {
+    display: flex;
+    height: 50px;
+    justify-content: space-around;
+    align-items: center;
+}

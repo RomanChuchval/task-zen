@@ -59,44 +59,7 @@ const initState: RootTasksStateType = {
             isActive: false,
             description: 'redux-saga is a library that aims to make application side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) easier to manage, more efficient to execute, easy to test, and better at handling failures.',
             priority: 'Low'
-        },
-        {
-            id: v1(),
-            title: 'Redux saga',
-            isActive: false,
-            description: 'redux-saga is a library that aims to make application side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) easier to manage, more efficient to execute, easy to test, and better at handling failures.',
-            priority: 'Low'
-        },
-        {
-            id: v1(),
-            title: 'Redux saga',
-            isActive: false,
-            description: 'redux-saga is a library that aims to make application side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) easier to manage, more efficient to execute, easy to test, and better at handling failures.',
-            priority: 'Low'
-        },
-        {
-            id: v1(),
-            title: 'Redux saga',
-            isActive: false,
-            description: 'redux-saga is a library that aims to make application side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) easier to manage, more efficient to execute, easy to test, and better at handling failures.',
-            priority: 'Low'
-        },{
-            id: v1(),
-            title: 'Redux saga',
-            isActive: false,
-            description: 'redux-saga is a library that aims to make application side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) easier to manage, more efficient to execute, easy to test, and better at handling failures.',
-            priority: 'Low'
-        },
-        {
-            id: v1(),
-            title: 'Redux saga',
-            isActive: false,
-            description: 'redux-saga is a library that aims to make application side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) easier to manage, more efficient to execute, easy to test, and better at handling failures.',
-            priority: 'Low'
-        },
-
-
-
+        }
     ],
     [TASK_LIST_ID3]: [
         {

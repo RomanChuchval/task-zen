@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import {Checkbox} from 'antd';
+import {CheckboxChangeEvent} from "antd/es/checkbox";
 
 type SuperCheckboxType = {
     isChecked: boolean
@@ -8,12 +9,21 @@ type SuperCheckboxType = {
 
 export const SuperCheckbox: FC<SuperCheckboxType> = (
     {
-        isChecked
+        isChecked,
+        callback
     }
 ) => {
+
+   const onChangeHandler = (e: CheckboxChangeEvent) => {
+       e.stopPropagation()
+       console.log(e)
+        callback()
+    }
+
     return (
         <Checkbox
-            onChange={() => {}}
+            onChange={onChangeHandler}
+            // onClick={onChangeHandler}
             checked={isChecked}>
             {isChecked ? 'Done' : 'In Progress'}
         </Checkbox>

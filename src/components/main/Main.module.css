@@ -27,7 +27,7 @@
     font-size: 18px;
 }
 
-.bold_span{
+.bold_span {
     font-size: 22px;
     font-weight: 500;
 }
@@ -59,10 +59,15 @@
     flex-direction: column;
 }
 
+.main_empty {
+    width: 100%;
+}
+
 .tasks_list_header {
     height: 50px;
     padding: 15px;
-    text-align: left;
+    display: flex;
+    justify-content: space-between;
     font-weight: 500;
 }
 
@@ -76,14 +81,4 @@
     overflow: auto;
 }
 
-.main_tasks_stats {
-    padding: 40px;
-    width: 25%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-    border-left: 1px solid #b0b4c0;
 
-}

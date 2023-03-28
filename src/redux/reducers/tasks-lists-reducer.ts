@@ -1,8 +1,8 @@
 import {v1} from "uuid";
 
-export const TASK_LIST_ID1 = v1()
-export const TASK_LIST_ID2 = v1()
-export const TASK_LIST_ID3 = v1()
+export const TASK_LIST_ID1 = '1'
+export const TASK_LIST_ID2 = '2'
+export const TASK_LIST_ID3 = '3'
 
 export type TaskListType = {
     id: string

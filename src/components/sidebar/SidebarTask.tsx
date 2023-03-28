@@ -3,20 +3,21 @@ import s from './SidebarTask.module.css'
 import {Badge} from 'antd';
 import {TaskListType} from "../../redux/reducers/tasks-lists-reducer";
 import {SuperCheckbox} from "../common/SuperCheckbox";
+import {NavLink, useMatch} from "react-router-dom";
 
 
 type SidebarTaskPropsType = {
     taskList: TaskListType
 }
 
-export const SidebarTask: FC <SidebarTaskPropsType> = (
+export const SidebarTask: FC<SidebarTaskPropsType> = (
     {
         taskList
     }
 ) => {
-
-     const getBadgeColor = () => {
-        if(taskList.priority === 'High') {
+    const match = useMatch(taskList.id)
+    const getBadgeColor = () => {
+        if (taskList.priority === 'High') {
             return '#f5222d'
         } else if (taskList.priority === 'Medium') {
             return '#faad14'
@@ -25,19 +26,20 @@ export const SidebarTask: FC <SidebarTaskPropsType> = (
         }
     }
     const badgeColor = getBadgeColor()
-
+    const activeCardClass = `${s.sidebar_task_wrapper} ${match ? s.sidebar_task_wrapper_active : ''}`
 
     return (
         <Badge.Ribbon text={taskList.priority} color={badgeColor}>
-        <div className={s.sidebar_task_wrapper}>
-            <div>{taskList.title}</div>
-               <span className={s.sidebar_task_description}>
-                   {taskList.description}
-               </span>
+            <div className={activeCardClass}>
+                <NavLink key={taskList.id} to={`/${taskList.id}`} className={s.navLink}>
+                        <div>{taskList.title}</div>
+                        <span className={s.sidebar_task_description}>{taskList.description}</span>
+                </NavLink>
                 <div className={s.sidebar_task_status}>
-                    <SuperCheckbox isChecked={taskList.isActive} callback={()=>{}} />
+                    <SuperCheckbox isChecked={taskList.isActive} callback={() => {
+                    }}/>
                 </div>
-        </div>
+            </div>
         </Badge.Ribbon>
     );
 };

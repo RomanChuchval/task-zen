@@ -1,0 +1,9 @@
+.sidebar_add_new_taskList {
+    border-bottom: 1px solid #b0b4c0;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
