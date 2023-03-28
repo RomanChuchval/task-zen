@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import s from './SidebarTask.module.css'
 import {Badge} from 'antd';
-import {TaskListType} from "../../redux/reducers/task-list-reducer";
+import {TaskListType} from "../../redux/reducers/tasks-lists-reducer";
 import {SuperCheckbox} from "../common/SuperCheckbox";
 
 
@@ -15,7 +15,7 @@ export const SidebarTask: FC <SidebarTaskPropsType> = (
     }
 ) => {
 
-    const getBadgeColor = () => {
+     const getBadgeColor = () => {
         if(taskList.priority === 'High') {
             return '#f5222d'
         } else if (taskList.priority === 'Medium') {

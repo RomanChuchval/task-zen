@@ -1,7 +1,8 @@
 import {v1} from "uuid";
 
-const TASK_LIST_ID1 = v1()
-const TASK_LIST_ID2 = v1()
+export const TASK_LIST_ID1 = v1()
+export const TASK_LIST_ID2 = v1()
+export const TASK_LIST_ID3 = v1()
 
 export type TaskListType = {
     id: string
@@ -26,8 +27,15 @@ const initState: Array<TaskListType> = [
         description: 'Redux ducks',
         isActive: true,
         priority: 'High',
+    },
+    {
+        id: TASK_LIST_ID3,
+        title: 'HTML / CSS',
+        description: 'HyperText Markup Language',
+        isActive: true,
+        priority: 'Low',
     }
 ]
-export const taskListReducer = (state: Array<TaskListType> = initState, action: any): Array<TaskListType> => {
+export const tasksListsReducer = (state: Array<TaskListType> = initState, action: any): Array<TaskListType> => {
     return state
 }

@@ -3,7 +3,7 @@ import s from './Header.module.css'
 import logo from '../../assets/logo.png'
 import avatar from '../../assets/2023-03-20 16.14.05.jpg'
 import {Button} from 'antd';
-import {LogoutOutlined} from '@ant-design/icons';
+import {LogoutOutlined, MessageOutlined} from '@ant-design/icons';
 import {Avatar, Badge} from 'antd';
 
 export const Header = () => {
@@ -15,8 +15,9 @@ export const Header = () => {
             </div>
             <div className={s.header_login}>
                 <Badge count={9}>
-                    <Avatar size={50} src={avatar}/>
+                    <MessageOutlined style={{fontSize: "25px", color: "#FFFFFF"}}/>
                 </Badge>
+                <Avatar size={50} src={avatar}/>
                 <Button type="primary">Log Out<LogoutOutlined/></Button>
             </div>
         </div>

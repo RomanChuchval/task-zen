@@ -5,7 +5,7 @@ import {Badge, Button} from "antd";
 import {SidebarTask} from "./SidebarTask";
 import {useSelector} from "react-redux";
 import {AppRootType} from "../../redux/store";
-import {TaskListType} from "../../redux/reducers/task-list-reducer";
+import {TaskListType} from "../../redux/reducers/tasks-lists-reducer";
 
 
 export const Sidebar = () => {

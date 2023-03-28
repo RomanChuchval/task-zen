@@ -1,9 +1,11 @@
 import {combineReducers, legacy_createStore} from "redux";
-import {taskListReducer} from "./reducers/task-list-reducer";
+import {tasksListsReducer} from "./reducers/tasks-lists-reducer";
+import {tasksReducer} from "./reducers/tasks-reducer";
 
 
 const rootReducer = combineReducers({
-    taskLists: taskListReducer
+    taskLists: tasksListsReducer,
+    tasks: tasksReducer,
 })
 
 
