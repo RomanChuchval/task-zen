@@ -4,7 +4,7 @@ import {CheckboxChangeEvent} from "antd/es/checkbox";
 
 type SuperCheckboxType = {
     isChecked: boolean
-    callback: () => void
+    callback: (e: CheckboxChangeEvent) => void
 }
 
 export const SuperCheckbox: FC<SuperCheckboxType> = (
@@ -16,14 +16,12 @@ export const SuperCheckbox: FC<SuperCheckboxType> = (
 
    const onChangeHandler = (e: CheckboxChangeEvent) => {
        e.stopPropagation()
-       console.log(e)
-        callback()
+        callback(e)
     }
 
     return (
         <Checkbox
             onChange={onChangeHandler}
-            // onClick={onChangeHandler}
             checked={isChecked}>
             {isChecked ? 'Done' : 'In Progress'}
         </Checkbox>

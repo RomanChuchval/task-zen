@@ -67,7 +67,7 @@
     height: 50px;
     padding: 15px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     font-weight: 500;
 }
 

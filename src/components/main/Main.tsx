@@ -8,7 +8,7 @@ import {AppstoreAddOutlined, SortAscendingOutlined, FilterOutlined} from '@ant-d
 import {SuperButton} from "../common/SuperButton";
 import {MembersAvatars} from "./members-avatars/MembersAvatars";
 import {Statistics} from "./statistics/Statistics";
-import {NavLink, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {Empty} from 'antd';
 
 
@@ -26,14 +26,12 @@ export const Main = () => {
     const taskListTitle = useSelector<AppRootType, string>(getTasksListTitle)
     const tasksArray = useSelector<AppRootType, Array<TasksStateType>>(state => state.tasks[tasksListId])
 
-    const tasks = tasksArray
-        ?
-        tasksArray.map(task => {
-            return (
-                <Task key={task.id} taskData={task}/>
-            )
-        })
-        : <Empty description={'Select tasks list for view tasks'}/>
+    const tasks = tasksListId && tasksArray.length
+        ? tasksArray.map(task => {
+        return (
+            <Task key={task.id} taskData={task} tasksListId={tasksListId}/>
+        )})
+        : null
 
     return (
         <div className={s.main_wrapper}>
@@ -58,26 +56,15 @@ export const Main = () => {
                 </div>
             </div>
             <div className={s.main_tasks_wrapper}>
-                <div className={`${tasksArray ? s.main_tasks : s.main_empty}`}>
-                    <div className={s.tasks_list_header}>
-                        {tasksArray &&
-                            <>
-                                <span>Tasks</span>
-                                <NavLink to={'/'}>
-                                    <SuperButton btnType={"primary"} btnSize={"small"} callback={() => {
-                                    }}>x</SuperButton>
-                                </NavLink>
-                            </>
-                        }
-                    </div>
+                <div className={`${tasks ? s.main_tasks : s.main_empty}`}>
                     <div className={s.tasks_list}>
-                        {tasks}
+                        {tasks ? tasks : <Empty description={'Tasks List is Empty!'}/>}
                     </div>
                 </div>
-                {tasksArray && <Statistics/>}
+                {!!tasks && <Statistics/> }
             </div>
-
         </div>
     );
 };
 
+// <Empty description={'Select tasks list for view tasks'}/>

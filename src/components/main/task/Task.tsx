@@ -1,20 +1,25 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import s from './Task.module.css'
 import {SuperCheckbox} from "../../common/SuperCheckbox";
-import {TasksStateType} from "../../../redux/reducers/tasks-reducer";
-import {Badge, Button} from 'antd';
+import {changeTaskStatusAC, removeTaskAC, TasksStateType} from "../../../redux/reducers/tasks-reducer";
+import {Badge} from 'antd';
 import {DeleteOutlined, EditOutlined} from '@ant-design/icons';
+import {CheckboxChangeEvent} from "antd/es/checkbox";
+import {useDispatch} from "react-redux";
+import {SuperButton} from "../../common/SuperButton";
 
 type TaskPropsType = {
     taskData: TasksStateType
+    tasksListId: string
 }
 
-export const Task: FC<TaskPropsType> = (
+export const Task: FC<TaskPropsType> = memo((
     {
-        taskData
+        taskData,
+        tasksListId
     }
 ) => {
-
+    const dispatch = useDispatch()
     const getBadgeColor = () => {
         if (taskData.priority === 'High') {
             return '#f5222d'
@@ -25,6 +30,12 @@ export const Task: FC<TaskPropsType> = (
         }
     }
     const badgeColor = getBadgeColor()
+    const changeTaskStatusHandler = (e: CheckboxChangeEvent) => {
+        dispatch(changeTaskStatusAC(e.target.checked, tasksListId, taskData.id))
+    }
+    const removeTaskHandler = () => {
+        dispatch(removeTaskAC(tasksListId, taskData.id ))
+    }
 
     return (
         <div className={s.task_wrapper}>
@@ -38,10 +49,12 @@ export const Task: FC<TaskPropsType> = (
                 <div className={s.task_description}>{taskData.description}</div>
             </div>
             <div className={s.task_actions}>
-                <SuperCheckbox isChecked={taskData.isActive} callback={() => {
-                }}/>
-                <Button size={'small'} type={'primary'} icon={<DeleteOutlined/>}>Remove</Button>
+                <SuperCheckbox isChecked={taskData.isDone} callback={(e) => changeTaskStatusHandler(e)}/>
+                <SuperButton btnType={"primary"}
+                             btnSize={"small"}
+                             callback={removeTaskHandler}
+                ><DeleteOutlined/>Remove</SuperButton>
             </div>
         </div>
     );
-};
+});

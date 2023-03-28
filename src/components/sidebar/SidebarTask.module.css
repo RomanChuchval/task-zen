@@ -37,7 +37,6 @@
 
 .sidebar_task_status {
     font-size: 13px;
-    width: min-content;
     position: absolute;
     bottom: 8px;
     left: 10px;
