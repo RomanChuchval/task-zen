@@ -13,6 +13,7 @@ type SuperButtonPropsType = {
     badgeCount?: ReactNode
     children: React.ReactNode
     withBadge?: boolean
+    block?: boolean
 }
 
 export const SuperButton: React.FC<SuperButtonPropsType> = (
@@ -24,7 +25,8 @@ export const SuperButton: React.FC<SuperButtonPropsType> = (
         badgeSize,
         badgeCount,
         children,
-        withBadge
+        withBadge,
+        block
     }
 ) => {
 
@@ -39,7 +41,7 @@ export const SuperButton: React.FC<SuperButtonPropsType> = (
         withBadge
             ?
             <Badge size={badgeSize} count={badgeCount}>
-                <Button onClick={onClickHandler} size={btnSize} type={btnType} style={buttonColor}>
+                <Button onClick={onClickHandler} size={btnSize} type={btnType} style={buttonColor} block={block}>
                     {children}
                 </Button>
             </Badge>

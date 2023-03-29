@@ -7,14 +7,36 @@ import {TaskListType} from "../../redux/reducers/tasks-lists-reducer";
 import {AddNewTasksList} from "./addNewTasksList/AddNewTasksList";
 import {CustomSearch} from "./search/CustomSearch";
 import {FilterBlock} from "./filterBlock/FilterBlock";
-
+import {PriorityFilterType} from "../../redux/reducers/filter-reducer";
 
 
 export const Sidebar = () => {
 
     const taskLists = useSelector<AppRootType, Array<TaskListType>>(state => state.taskLists)
+    const priorityFiltersArray = useSelector<AppRootType, Array<PriorityFilterType>>(state => state.filters.priorityFilter)
+    const statusFilter = useSelector<AppRootType, boolean | null>(state => state.filters.statusFilter)
 
-    const sidebarTasksLists = taskLists.map(tl => {
+    const filterTasksLists = () => {
+        let filteredTasksLists = taskLists
+        if(!priorityFiltersArray.length && statusFilter === null) {
+            return filteredTasksLists
+        } else {
+            if (statusFilter === null) {
+                filteredTasksLists = taskLists.filter(tl => priorityFiltersArray.includes(tl.priority))
+            } else if (!priorityFiltersArray.length) {
+                filteredTasksLists = taskLists.filter(el => el.isDone === statusFilter)
+            }
+            else {
+                let filteredForPriority: Array<TaskListType> = taskLists.filter(tl => priorityFiltersArray.includes(tl.priority))
+                filteredTasksLists = filteredForPriority.filter(el => el.isDone === statusFilter)
+            }
+        }
+        return filteredTasksLists
+    }
+    const tasksListsForRender = filterTasksLists()
+
+
+    const sidebarTasksLists = tasksListsForRender.map(tl => {
         return (
                 <SidebarTask key={tl.id} taskList={tl}/>
         )
@@ -24,7 +46,7 @@ export const Sidebar = () => {
         <div className={s.sidebar_wrapper}>
             <AddNewTasksList/>
             <CustomSearch/>
-            <FilterBlock/>
+            <FilterBlock tasksLists={tasksListsForRender}/>
             <div className={s.sidebar_tasks_wrapper}>
                 {sidebarTasksLists}
             </div>

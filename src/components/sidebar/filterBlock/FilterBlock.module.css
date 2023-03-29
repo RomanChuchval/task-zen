@@ -4,3 +4,10 @@
     justify-content: space-around;
     align-items: center;
 }
+
+.reset_filter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 10px;
+}

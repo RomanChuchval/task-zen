@@ -6,7 +6,7 @@ export const CustomSearch = memo(() => {
     console.log('sidebar search render')
     return (
         <div className={s.sidebar_search}>
-            <Search size='large' style={{width: '95%'}} placeholder="search task" enterButton={'Search'}/>
+            <Search size='middle' style={{width: '95%'}} placeholder="search task" enterButton={'Search'}/>
         </div>
     );
 });

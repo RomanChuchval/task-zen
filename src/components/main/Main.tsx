@@ -23,6 +23,7 @@ export const Main = () => {
             return ''
         }
     }
+
     const taskListTitle = useSelector<AppRootType, string>(getTasksListTitle)
     const tasksArray = useSelector<AppRootType, Array<TasksStateType>>(state => state.tasks[tasksListId])
 
@@ -61,7 +62,7 @@ export const Main = () => {
                         {tasks ? tasks : <Empty description={'Tasks List is Empty!'}/>}
                     </div>
                 </div>
-                {!!tasks && <Statistics/> }
+                {tasks && <Statistics/> }
             </div>
         </div>
     );

@@ -1,4 +1,5 @@
 import {v1} from "uuid";
+import {PriorityFilterType} from "./filter-reducer";
 
 export const TASK_LIST_ID1 = '1'
 export const TASK_LIST_ID2 = '2'
@@ -11,7 +12,7 @@ export type TaskListType = {
     title: string
     description: string
     isDone: boolean
-    priority: string
+    priority: PriorityFilterType
 }
 
 const initState: Array<TaskListType> = [
