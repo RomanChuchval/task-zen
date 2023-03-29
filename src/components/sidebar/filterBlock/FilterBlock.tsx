@@ -2,23 +2,27 @@ import React, {FC, memo} from 'react';
 import {SuperButton} from "../../common/SuperButton";
 import s from "./FilterBlock.module.css";
 import {TaskListType} from "../../../redux/reducers/tasks-lists-reducer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
     changePriorityFilterAC,
-    changeStatusFilterAC,
+    changeStatusFilterAC, InitFilterStateType,
     PriorityFilterType,
     resetFiltersAC
 } from "../../../redux/reducers/filter-reducer";
+import {AppRootType} from "../../../redux/store";
 
 type FilterBlockPropsType = {
     tasksLists: Array<TaskListType>
 }
 
 export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
+    const filters = useSelector<AppRootType, InitFilterStateType>(state => state.filters)
     const dispatch = useDispatch()
+    console.log(filters)
 
+    // Counting buttons badges values //
     const getLowPriorityTasksList = () => tasksLists.filter(el => el.priority === 'Low').length
-    const lowPriorityCount =  getLowPriorityTasksList()
+    const lowPriorityCount = getLowPriorityTasksList()
     const getMediumPriorityTasksList = () => tasksLists.filter(el => el.priority === 'Medium').length
     const middlePriorityCount = getMediumPriorityTasksList()
     const getHighPriorityTasksList = () => tasksLists.filter(el => el.priority === 'High').length
@@ -28,22 +32,45 @@ export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
     const getDoneTasksList = () => tasksLists.filter(el => el.isDone).length
     const doneTasksListCount = getDoneTasksList()
     const allTasksListCount = tasksLists.length
+    // Counting buttons badges values //
 
+    // Set filters values //
     const setPriorityFilters = (newFilterValue: PriorityFilterType) => {
         dispatch(changePriorityFilterAC(newFilterValue))
     }
     const setStatusFilters = (newFilterValue: boolean | null) => {
         dispatch(changeStatusFilterAC(newFilterValue))
     }
-
     const resetFilters = () => {
         dispatch(resetFiltersAC())
     }
+    // Set filters values //
+
+    // Display active filters //
+    const filtersValues = () => {
+        let statusValue = filters.statusFilter === true ? 'Completed'
+            : filters.statusFilter === false ? 'Active' : 'All'
+        return [statusValue, ...filters.priorityFilter]
+    }
+    const displayFiltersValues = filtersValues().map(value => {
+        const removeFilter = () => {
+
+        }
+
+        return <span className={s.filter_value}>
+            <span>{value}</span>
+            <SuperButton btnType={"default"} btnSize={"small"} shape={"circle"}>x</SuperButton>
+        </span>
+    })
+    // Display active filters //
 
     return (
         <>
             <div className={s.reset_filter}>
-                <SuperButton btnSize={'small'} btnType={"text"} callback={resetFilters}>Reset Filter</SuperButton>
+                <SuperButton btnSize={'small'} btnType={"default"} callback={resetFilters}>Reset</SuperButton>
+            </div>
+            <div className={s.filters_values}>
+                {displayFiltersValues}
             </div>
             <div className={s.sidebar_filter}>
                 <SuperButton btnSize={"small"} btnType={"primary"} callback={() => setPriorityFilters('Low')}
@@ -60,15 +87,15 @@ export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
                 </SuperButton>
             </div>
             <div className={s.sidebar_filter}>
-                <SuperButton btnSize={"small"} btnType={"primary"} callback={()=>setStatusFilters(null)}
+                <SuperButton btnSize={"small"} btnType={"primary"} callback={() => setStatusFilters(null)}
                              badgeSize={"small"} badgeCount={allTasksListCount} withBadge={true}>
                     All
                 </SuperButton>
-                <SuperButton btnSize={"small"} btnType={"primary"} callback={()=>setStatusFilters(false)}
-                             badgeSize={"small"} badgeCount={activeTasksListCount} withBadge={true} >
+                <SuperButton btnSize={"small"} btnType={"primary"} callback={() => setStatusFilters(false)}
+                             badgeSize={"small"} badgeCount={activeTasksListCount} withBadge={true}>
                     Active
                 </SuperButton>
-                <SuperButton btnSize={"small"} btnType={"primary"} callback={()=>setStatusFilters(true)}
+                <SuperButton btnSize={"small"} btnType={"primary"} callback={() => setStatusFilters(true)}
                              badgeSize={"small"} badgeCount={doneTasksListCount} withBadge={true}>
                     Completed
                 </SuperButton>

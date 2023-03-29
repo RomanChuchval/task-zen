@@ -23,7 +23,11 @@ const initFilterState: InitFilterStateType = {
 export const filterReducer = (state: InitFilterStateType = initFilterState, action: ActionsTypes): InitFilterStateType => {
     switch (action.type) {
         case CHANGE_PRIORITY_FILTER:
-            return {...state, priorityFilter: [action.payload.newFilterValue]}
+            return {...state, priorityFilter:
+                    state.priorityFilter.includes(action.payload.newFilterValue)
+                    ? [...state.priorityFilter]
+                    : [...state.priorityFilter, action.payload.newFilterValue]
+                    }
         case CHANGE_STATUS_FILTER:
             return {...state, statusFilter: action.payload.newFilterValue}
         case RESET_ALL_FILTERS:
