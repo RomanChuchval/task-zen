@@ -1,8 +1,16 @@
-import {TASK_LIST_ID1, TASK_LIST_ID2, TASK_LIST_ID3, TASK_LIST_ID4, TASK_LIST_ID5} from "./tasks-lists-reducer";
+import {
+    REMOVE_TASKS_LIST,
+    RemoveTasksListActionType,
+    TASK_LIST_ID1,
+    TASK_LIST_ID2,
+    TASK_LIST_ID3,
+    TASK_LIST_ID4,
+    TASK_LIST_ID5
+} from "./tasks-lists-reducer";
 import {v1} from "uuid";
 
 export type RootTasksStateType = {
-    [key: string] : Array<TasksStateType>
+    [key: string]: Array<TasksStateType>
 }
 export type TasksStateType = {
     id: string
@@ -14,6 +22,7 @@ export type TasksStateType = {
 
 type ActionsType = ReturnType<typeof changeTaskStatusAC>
     | ReturnType<typeof removeTaskAC>
+    | RemoveTasksListActionType
 
 const initState: RootTasksStateType = {
     [TASK_LIST_ID1]: [
@@ -163,13 +172,18 @@ export const tasksReducer = (state: RootTasksStateType = initState, action: Acti
                 ...state, [action.payload.tasksListId]:
                     state[action.payload.tasksListId].filter(t => t.id !== action.payload.taskId)
             }
-        default: return state
+        case REMOVE_TASKS_LIST:
+            let stateCopy = {...state}
+            delete stateCopy[action.payload.id]
+            return stateCopy
+        default:
+            return state
     }
 }
 
 const CHANGE_TASK_STATUS = 'CHANGE_TASK_STATUS'
 const REMOVE_TASK = "REMOVE_TASK"
-export const changeTaskStatusAC = (newTaskStatus: boolean, tasksListId:string, taskId: string) => {
+export const changeTaskStatusAC = (newTaskStatus: boolean, tasksListId: string, taskId: string) => {
     return {
         type: CHANGE_TASK_STATUS,
         payload: {
@@ -180,7 +194,7 @@ export const changeTaskStatusAC = (newTaskStatus: boolean, tasksListId:string, t
     } as const
 }
 
-export const removeTaskAC = (tasksListId:string, taskId: string) => {
+export const removeTaskAC = (tasksListId: string, taskId: string) => {
     return {
         type: REMOVE_TASK,
         payload: {

@@ -14,23 +14,22 @@ import {Empty} from 'antd';
 
 export const Main = () => {
     const {id} = useParams()
-    const tasksListId = id ? id : ''
-    const getTasksListTitle = (state: AppRootType): string => {
-        if (tasksListId) {
-            const tasksList = state.taskLists.filter(tl => tl.id === tasksListId)
-            return tasksList[0].title
-        } else {
-            return ''
+    const tasksListIdParams = id ? id : ''
+
+    const getTasksListTitle = (state: AppRootType): string | undefined => {
+        if (tasksListIdParams) {
+            const tasksList = state.taskLists.filter(tl => tl.id === tasksListIdParams)
+            return tasksList[0] ? tasksList[0].title : ''
         }
     }
 
-    const taskListTitle = useSelector<AppRootType, string>(getTasksListTitle)
-    const tasksArray = useSelector<AppRootType, Array<TasksStateType>>(state => state.tasks[tasksListId])
+    const taskListTitle = useSelector<AppRootType, string | undefined>(getTasksListTitle)
+    const tasksArray = useSelector<AppRootType, Array<TasksStateType>>(state => state.tasks[tasksListIdParams])
 
-    const tasks = tasksListId && tasksArray.length
+    const tasks = tasksListIdParams && tasksArray.length
         ? tasksArray.map(task => {
         return (
-            <Task key={task.id} taskData={task} tasksListId={tasksListId}/>
+            <Task key={task.id} taskData={task} tasksListId={tasksListIdParams}/>
         )})
         : null
 
@@ -41,7 +40,7 @@ export const Main = () => {
                     Task Overview
                 </div>
                 <div className={s.main_title}>
-                    <span className={s.bold_span}>{taskListTitle}</span>
+                    <span className={s.bold_span}>{'No Tasks' && taskListTitle}</span>
                     <div className={s.main_members_block}>
                         <span>Members </span>
                         <MembersAvatars/>

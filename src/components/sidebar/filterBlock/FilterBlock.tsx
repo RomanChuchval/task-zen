@@ -1,4 +1,4 @@
-import React, {FC, memo, useMemo} from 'react';
+import React, {FC, memo} from 'react';
 import {SuperButton} from "../../common/SuperButton";
 import s from "./FilterBlock.module.css";
 import {TaskListType} from "../../../redux/reducers/tasks-lists-reducer";
@@ -20,9 +20,8 @@ export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
     const filters = useSelector<AppRootType, InitFilterStateType>(state => state.filters)
     const dispatch = useDispatch()
 
-
     // Counting buttons badges values //
-    const getLowPriorityTasksList = useMemo(() => () => tasksLists.filter(el => el.priority === 'Low').length, [tasksLists])
+    const getLowPriorityTasksList = ( () => tasksLists.filter(el => el.priority === 'Low').length)
     const lowPriorityCount = getLowPriorityTasksList()
     const getMediumPriorityTasksList = () => tasksLists.filter(el => el.priority === 'Medium').length
     const middlePriorityCount = getMediumPriorityTasksList()
@@ -33,7 +32,6 @@ export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
     const getDoneTasksList = () => tasksLists.filter(el => el.isDone).length
     const doneTasksListCount = getDoneTasksList()
     const allTasksListCount = tasksLists.length
-    // Counting buttons badges values //
 
     // Set filters values //
     const setPriorityFilters = (newFilterValue: PriorityFilterType) => {
@@ -45,7 +43,6 @@ export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
     const resetFilters = () => {
         dispatch(resetFiltersAC())
     }
-    // Set filters values //
 
     // Display active filters //
     const filtersValues = () => {
@@ -54,16 +51,12 @@ export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
         return [statusValue, ...filters.priorityFilter]
     }
     const displayFiltersValues = filtersValues().map(value => {
-        const removeFilter = () => {
-
-        }
 
         return <span key={v1()} className={s.filter_value}>
-            <span>{value}</span>
-            <SuperButton btnType={"default"} btnSize={"small"} shape={"circle"}>x</SuperButton>
+            <span>{value} </span>
+            {/*<SuperButton btnType={"default"} btnSize={"small"} shape={"circle"}>x</SuperButton>*/}
         </span>
     })
-    // Display active filters //
 
     return (
         <>

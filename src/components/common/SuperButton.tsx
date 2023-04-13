@@ -32,7 +32,7 @@ export const SuperButton: React.FC<SuperButtonPropsType> = (
     }
 ) => {
 
-    const getButtonColor = () => btnColor ? {backgroundColor: btnColor} : undefined
+    const getButtonColor = () => btnColor ? btnColor : undefined
     const buttonColor = getButtonColor()
 
     const onClickHandler = () => {
@@ -43,13 +43,13 @@ export const SuperButton: React.FC<SuperButtonPropsType> = (
         withBadge
             ?
             <Badge size={badgeSize} count={badgeCount}>
-                <Button onClick={onClickHandler} size={btnSize} type={btnType} style={buttonColor} block={block}>
+                <Button onClick={onClickHandler} size={btnSize} type={btnType} style={{backgroundColor: buttonColor}} block={block}>
                     {children}
                 </Button>
             </Badge>
             :
             <Button onClick={onClickHandler} size={btnSize}
-                    type={btnType} style={buttonColor}
+                    type={btnType} style={{backgroundColor: buttonColor}}
                     block={block} shape={shape}
 
             >

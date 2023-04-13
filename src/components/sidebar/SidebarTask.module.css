@@ -36,8 +36,11 @@
 }
 
 .sidebar_task_status {
+    width: 95%;
     font-size: 13px;
     position: absolute;
     bottom: 8px;
     left: 10px;
+    display: flex;
+    justify-content: space-between;
 }

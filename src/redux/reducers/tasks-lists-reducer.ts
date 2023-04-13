@@ -1,4 +1,3 @@
-import {v1} from "uuid";
 import {PriorityFilterType} from "./filter-reducer";
 
 export const TASK_LIST_ID1 = '1'
@@ -55,26 +54,39 @@ const initState: Array<TaskListType> = [
 
 ]
 export const tasksListsReducer = (state: Array<TaskListType> = initState, action: ActionsType): Array<TaskListType> => {
-        switch(action.type) {
-            case CHANGE_TASKS_LIST_STATUS:
-                return state.map(tl => tl.id === action.payload.taskListId
+    switch (action.type) {
+        case CHANGE_TASKS_LIST_STATUS:
+            return state.map(tl => tl.id === action.payload.taskListId
                 ? {...tl, isDone: action.payload.newStatus}
                 : tl)
-        }
+        case REMOVE_TASKS_LIST:
+            return state.filter(tl => tl.id !== action.payload.id)
+    }
     return state
 }
 
-
+export type RemoveTasksListActionType = ReturnType<typeof removeTasksListAC>
 type ActionsType = ReturnType<typeof changeTasksListStatusAC>
+    | RemoveTasksListActionType
 
 
 const CHANGE_TASKS_LIST_STATUS = 'CHANGE_TASKS_LIST_STATUS'
+export const REMOVE_TASKS_LIST = 'REMOVE_TASKS_LIST'
 export const changeTasksListStatusAC = (newStatus: boolean, taskListId: string) => {
     return {
         type: CHANGE_TASKS_LIST_STATUS,
         payload: {
             newStatus,
             taskListId
+        }
+    } as const
+}
+
+export const removeTasksListAC = (id: string) => {
+    return {
+        type: REMOVE_TASKS_LIST,
+        payload: {
+            id
         }
     } as const
 }
