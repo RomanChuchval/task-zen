@@ -1,5 +1,4 @@
 
-
 //========== TYPES ========== //
 export type PriorityFilterType = 'Low' | 'Medium' | 'High'
 
@@ -19,13 +18,13 @@ const initFilterState: InitFilterStateType = {
     priorityFilter: [],
     statusFilter: null
 }
-
+//
 export const filterReducer = (state: InitFilterStateType = initFilterState, action: ActionsTypes): InitFilterStateType => {
     switch (action.type) {
         case CHANGE_PRIORITY_FILTER:
             return {...state, priorityFilter:
                     state.priorityFilter.includes(action.payload.newFilterValue)
-                    ? [...state.priorityFilter]
+                    ? state.priorityFilter
                     : [...state.priorityFilter, action.payload.newFilterValue]
                     }
         case CHANGE_STATUS_FILTER:

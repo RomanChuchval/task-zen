@@ -1,4 +1,4 @@
-import React, {FC, memo} from 'react';
+import React, {FC, memo, useMemo} from 'react';
 import {SuperButton} from "../../common/SuperButton";
 import s from "./FilterBlock.module.css";
 import {TaskListType} from "../../../redux/reducers/tasks-lists-reducer";
@@ -10,6 +10,7 @@ import {
     resetFiltersAC
 } from "../../../redux/reducers/filter-reducer";
 import {AppRootType} from "../../../redux/store";
+import {v1} from "uuid";
 
 type FilterBlockPropsType = {
     tasksLists: Array<TaskListType>
@@ -18,10 +19,10 @@ type FilterBlockPropsType = {
 export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
     const filters = useSelector<AppRootType, InitFilterStateType>(state => state.filters)
     const dispatch = useDispatch()
-    console.log(filters)
+
 
     // Counting buttons badges values //
-    const getLowPriorityTasksList = () => tasksLists.filter(el => el.priority === 'Low').length
+    const getLowPriorityTasksList = useMemo(() => () => tasksLists.filter(el => el.priority === 'Low').length, [tasksLists])
     const lowPriorityCount = getLowPriorityTasksList()
     const getMediumPriorityTasksList = () => tasksLists.filter(el => el.priority === 'Medium').length
     const middlePriorityCount = getMediumPriorityTasksList()
@@ -57,7 +58,7 @@ export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
 
         }
 
-        return <span className={s.filter_value}>
+        return <span key={v1()} className={s.filter_value}>
             <span>{value}</span>
             <SuperButton btnType={"default"} btnSize={"small"} shape={"circle"}>x</SuperButton>
         </span>

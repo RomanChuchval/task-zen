@@ -10,7 +10,6 @@ const rootReducer = combineReducers({
     filters: filterReducer
 })
 
-
 export type AppRootType = ReturnType<typeof rootReducer>
 
 export const store = legacy_createStore(rootReducer)

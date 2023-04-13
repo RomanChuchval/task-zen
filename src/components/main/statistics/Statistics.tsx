@@ -10,6 +10,7 @@ export const Statistics = () => {
 
     const {id} = useParams()
     const tasksListId = id ? id : ''
+
     const tasksArray = useSelector<AppRootType, Array<TasksStateType>>(state => state.tasks[tasksListId])
     const getCompletedProgressCount = () => {
         const completedTasksCount = tasksArray.filter(t => t.isDone).length
