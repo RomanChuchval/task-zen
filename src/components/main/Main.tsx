@@ -10,25 +10,19 @@ import {MembersAvatars} from "./members-avatars/MembersAvatars";
 import {Statistics} from "./statistics/Statistics";
 import {useParams} from "react-router-dom";
 import {Empty} from 'antd';
-import {AddTaskDrawer} from "./task/addTaskDrawer/AddTaskDrawer";
+import {AddEntityDrawer} from "./task/addEntityDrawer/AddEntityDrawer";
 import {toggleDrawerAC} from "../../redux/reducers/app-reducer";
+import {getTasksListTitle} from "../../utils/selectors/tasksListTitleSelector";
 
 
 export const Main = () => {
-    const isDrawerOpen = useSelector<AppRootType, boolean>(state => state.app.isDrawerOpen)
-    const dispatch = useDispatch()
     const {id} = useParams()
+    const dispatch = useDispatch()
     const tasksListIdParams = id ? id : ''
-
-    const getTasksListTitle = (state: AppRootType): string | undefined => {
-        if (tasksListIdParams) {
-            const tasksList = state.taskLists.filter(tl => tl.id === tasksListIdParams)
-            return tasksList[0] ? tasksList[0].title : ''
-        }
-    }
-
-    const taskListTitle = useSelector<AppRootType, string | undefined>(getTasksListTitle)
+    const isDrawerOpen = useSelector<AppRootType, boolean>(state => state.app.isDrawerOpen)
     const tasksArray = useSelector<AppRootType, Array<TasksStateType>>(state => state.tasks[tasksListIdParams])
+    const taskListTitle = useSelector<AppRootType, string | undefined>((state: AppRootType)=>
+        getTasksListTitle(state,tasksListIdParams))
 
     const tasks = tasksListIdParams && tasksArray.length
         ? tasksArray.map(task => {
@@ -38,7 +32,7 @@ export const Main = () => {
         : null
 
     const onOpenDrawerHandler = () => {
-        dispatch(toggleDrawerAC(true))
+        dispatch(toggleDrawerAC(true, 'addTask'))
     }
 
     return (
@@ -55,11 +49,11 @@ export const Main = () => {
                     </div>
                 </div>
                 <div className={s.main_settings}>
-                    <SuperButton btnType={"primary"} disabled={!tasks} callback={onOpenDrawerHandler}>
+                    <SuperButton btnType={"primary"} disabled={!tasksListIdParams} callback={onOpenDrawerHandler}>
                         <AppstoreAddOutlined/>Add New Task</SuperButton>
-                    <SuperButton btnType={"primary"} disabled={!tasks} callback={() => {
+                    <SuperButton btnType={"primary"} disabled={!tasksListIdParams} callback={() => {
                     }}><FilterOutlined/>Filter</SuperButton>
-                    <SuperButton btnType={"primary"} disabled={!tasks} callback={() => {
+                    <SuperButton btnType={"primary"} disabled={!tasksListIdParams} callback={() => {
                     }}><SortAscendingOutlined/>Sort</SuperButton>
                 </div>
             </div>
@@ -70,7 +64,7 @@ export const Main = () => {
                     </div>
                 </div>
                 {tasks && <Statistics/> }
-                <AddTaskDrawer isOpen={isDrawerOpen} tasksListId={tasksListIdParams} />
+                <AddEntityDrawer isOpen={isDrawerOpen} tasksListId={tasksListIdParams} />
             </div>
         </div>
     );

@@ -1,4 +1,6 @@
 import {
+    CREATE_TASKS_LIST,
+    CreateTasksListActionType,
     REMOVE_TASKS_LIST,
     RemoveTasksListActionType,
     TASK_LIST_ID1,
@@ -166,12 +168,14 @@ export const tasksReducer = (state: RootTasksStateType = initState, action: Task
         case CREATE_TASK:
             const newTask = {
                 id: action.payload.taskId,
-                title: action.payload.data.taskTitle,
+                title: action.payload.data.title,
                 isDone: false,
-                description: action.payload.data.taskDescription,
-                priority: action.payload.data.taskPriority
+                description: action.payload.data.description,
+                priority: action.payload.data.priority
             }
             return {...state, [action.payload.tasksListId]: [newTask, ...state[action.payload.tasksListId]]}
+        case CREATE_TASKS_LIST:
+            return {...state, [action.payload.id]: []}
         default:
             return state
     }
@@ -201,7 +205,7 @@ export const removeTaskAC = (tasksListId: string, taskId: string) => {
     } as const
 }
 
-export const createTaskAC = (tasksListId: string, data: CreateNewTaskDataType) => {
+export const createTaskAC = (tasksListId: string, data: CreateNewEntityDataType) => {
     return {
         type: CREATE_TASK,
         payload: {
@@ -217,10 +221,10 @@ export const createTaskAC = (tasksListId: string, data: CreateNewTaskDataType) =
 export type RootTasksStateType = {
     [key: string]: Array<TasksStateType>
 }
-export type CreateNewTaskDataType = {
-    taskTitle: string,
-    taskDescription: string,
-    taskPriority: PriorityTypes
+export type CreateNewEntityDataType = {
+    title: string,
+    description: string,
+    priority: PriorityTypes
 }
 export type TasksStateType = {
     id: string
@@ -234,3 +238,4 @@ type TasksActionsTypes = ReturnType<typeof changeTaskStatusAC>
     | ReturnType<typeof removeTaskAC>
     | RemoveTasksListActionType
     | ReturnType<typeof createTaskAC>
+    | CreateTasksListActionType

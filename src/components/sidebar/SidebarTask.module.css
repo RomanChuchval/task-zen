@@ -10,6 +10,7 @@
     background-color: white;
     transition: 0.3s;
     position: relative;
+    padding: 5px;
 }
 
 .sidebar_task_wrapper_active {
@@ -29,7 +30,7 @@
 
 .sidebar_task_wrapper:hover {
     background-color: rgb(229, 229, 229);
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 .sidebar_task_description {
     font-size: 13px;
@@ -39,8 +40,12 @@
     width: 95%;
     font-size: 13px;
     position: absolute;
-    bottom: 8px;
+    bottom: 17px;
     left: 10px;
     display: flex;
     justify-content: space-between;
+}
+
+.sidebar_added_at {
+    font-size: 11px;
 }

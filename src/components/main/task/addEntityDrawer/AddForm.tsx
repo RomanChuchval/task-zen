@@ -8,58 +8,68 @@ import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {PriorityTypes} from "../../../../redux/reducers/filter-reducer";
 import {Button} from "antd";
 import {createTaskAC} from "../../../../redux/reducers/tasks-reducer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootType} from "../../../../redux/store";
+import {DrawerVariantType, toggleDrawerAC} from "../../../../redux/reducers/app-reducer";
+import {createTasksListAC} from "../../../../redux/reducers/tasks-lists-reducer";
 
 
 type AddTaskFormPropsType = {
     tasksListId: string
 }
 type Inputs = {
-    taskTitle: string,
-    taskDescription: string,
-    taskPriority: PriorityTypes
+    title: string,
+    description: string,
+    priority: PriorityTypes
 };
 
-export const AddTaskForm: FC<AddTaskFormPropsType> = ({tasksListId}) => {
+export const AddForm: FC<AddTaskFormPropsType> = ({tasksListId}) => {
     const {control, handleSubmit, reset, formState: {errors}} = useForm<Inputs>({
         mode: "all"
     });
+    const formVariant = useSelector<AppRootType, DrawerVariantType>(state => state.app.formVariant)
     const dispatch = useDispatch()
 
     const onFormSubmit: SubmitHandler<Inputs> = (data) => {
-        dispatch(createTaskAC(tasksListId, data))
+        if(formVariant === 'addTask') {
+            dispatch(createTaskAC(tasksListId, data))
+        } else if (formVariant === 'addTasksList') {
+            dispatch(createTasksListAC(data))
+        }
         reset()
+        dispatch(toggleDrawerAC(false, null))
     }
+    const placeHolderVariant = formVariant === 'addTask' ? 'Task' : 'Tasks list'
 
     return (
         <form onSubmit={handleSubmit(onFormSubmit)} className={s.add_task_form}>
             <div>
-                <Controller name={'taskTitle'}
+                <Controller name={'title'}
                             control={control}
                             rules={{required: true}}
                             render={({field}) => (
                                 <Input {...field} size={"large"}
-                                       placeholder={errors.taskTitle ? 'Title is required':'Task title'}
-                                       status={errors.taskTitle && 'error'}
+                                       placeholder={errors.title ? 'Title is required':`${placeHolderVariant} title`}
+                                       status={errors.title && 'error'}
                                 />)}
                 />
-
             </div>
             <div>
-                <Controller name={'taskDescription'}
+                <Controller name={'description'}
                             control={control}
                             rules={{required: true}}
                             render={({field}) => (
                                 <TextArea {...field} maxLength={100}
-                                          placeholder={errors.taskDescription ? 'Title is required':'Task description'}
-                                          status={errors.taskDescription && 'error'}
+                                          placeholder={errors.description
+                                              ? 'Description is required'
+                                              :`${placeHolderVariant} description`}
+                                          status={errors.description && 'error'}
                                           size={'large'}/>
                             )}/>
-
             </div>
             <div className={s.priority_selector}>
                 <Divider>Priority</Divider>
-                <Controller name={'taskPriority'}
+                <Controller name={'priority'}
                             control={control}
                             defaultValue={'Low'}
                             rules={{required: true}}
@@ -72,7 +82,7 @@ export const AddTaskForm: FC<AddTaskFormPropsType> = ({tasksListId}) => {
                             )}/>
             </div>
             <Button type="primary" htmlType={'submit'}>
-                Add New Task
+                {formVariant === 'addTask' ? 'Create Task' : 'Create Tasks List'}
             </Button>
         </form>
     );
