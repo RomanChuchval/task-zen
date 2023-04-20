@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './Main.module.css'
 import {Task} from "./task/Task";
 import {useSelector} from "react-redux";
@@ -10,9 +10,11 @@ import {MembersAvatars} from "./members-avatars/MembersAvatars";
 import {Statistics} from "./statistics/Statistics";
 import {useParams} from "react-router-dom";
 import {Empty} from 'antd';
+import {AddTaskDrawer} from "./task/addTaskDrawer/AddTaskDrawer";
 
 
 export const Main = () => {
+    const [openDrawer, setOpenDrawer] = useState<boolean>(false)
     const {id} = useParams()
     const tasksListIdParams = id ? id : ''
 
@@ -33,6 +35,10 @@ export const Main = () => {
         )})
         : null
 
+    const onOpenDrawerHandler = () => {
+        setOpenDrawer(true)
+    }
+
     return (
         <div className={s.main_wrapper}>
             <div>
@@ -40,18 +46,18 @@ export const Main = () => {
                     Task Overview
                 </div>
                 <div className={s.main_title}>
-                    <span className={s.bold_span}>{'No Tasks' && taskListTitle}</span>
+                    <span className={s.bold_span}>{taskListTitle}</span>
                     <div className={s.main_members_block}>
                         <span>Members </span>
                         <MembersAvatars/>
                     </div>
                 </div>
                 <div className={s.main_settings}>
-                    <SuperButton btnType={"primary"} callback={() => {
-                    }}><AppstoreAddOutlined/>Add New Task</SuperButton>
-                    <SuperButton btnType={"primary"} callback={() => {
+                    <SuperButton btnType={"primary"} disabled={!tasks} callback={onOpenDrawerHandler}>
+                        <AppstoreAddOutlined/>Add New Task</SuperButton>
+                    <SuperButton btnType={"primary"} disabled={!tasks} callback={() => {
                     }}><FilterOutlined/>Filter</SuperButton>
-                    <SuperButton btnType={"primary"} callback={() => {
+                    <SuperButton btnType={"primary"} disabled={!tasks} callback={() => {
                     }}><SortAscendingOutlined/>Sort</SuperButton>
                 </div>
             </div>
@@ -62,9 +68,8 @@ export const Main = () => {
                     </div>
                 </div>
                 {tasks && <Statistics/> }
+                <AddTaskDrawer isOpen={openDrawer} onCloseCallback={setOpenDrawer} tasksListId={tasksListIdParams} />
             </div>
         </div>
     );
 };
-
-// <Empty description={'Select tasks list for view tasks'}/>

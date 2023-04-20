@@ -21,6 +21,7 @@ export const SidebarTask: FC<SidebarTaskPropsType> = (
 ) => {
     const dispatch = useDispatch()
     const match = useMatch(taskList.id)
+    console.log(match)
     const getBadgeColor = () => {
         if (taskList.priority === 'High') {
             return '#f5222d'

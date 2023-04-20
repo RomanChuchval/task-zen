@@ -19,8 +19,8 @@ export const App = () => {
             </aside>
             <main className='Main'>
                 <Routes>
-                        <Route path={'/:id'} element={<Main/>}/>
-                        <Route index element={<Main/>}/>
+                        <Route path={'/:id?'} element={<Main/>}/>
+                        {/*<Route index element={<Main/>}/>*/}
                 </Routes>
             </main>
             <footer className='Footer'>

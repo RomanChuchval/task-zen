@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     changePriorityFilterAC,
     changeStatusFilterAC, InitFilterStateType,
-    PriorityFilterType,
+    PriorityTypes,
     resetFiltersAC
 } from "../../../redux/reducers/filter-reducer";
 import {AppRootType} from "../../../redux/store";
@@ -34,7 +34,7 @@ export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
     const allTasksListCount = tasksLists.length
 
     // Set filters values //
-    const setPriorityFilters = (newFilterValue: PriorityFilterType) => {
+    const setPriorityFilters = (newFilterValue: PriorityTypes) => {
         dispatch(changePriorityFilterAC(newFilterValue))
     }
     const setStatusFilters = (newFilterValue: boolean | null) => {

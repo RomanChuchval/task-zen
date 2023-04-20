@@ -1,4 +1,4 @@
-import {PriorityFilterType} from "./filter-reducer";
+import {PriorityTypes} from "./filter-reducer";
 
 export const TASK_LIST_ID1 = '1'
 export const TASK_LIST_ID2 = '2'
@@ -11,7 +11,7 @@ export type TaskListType = {
     title: string
     description: string
     isDone: boolean
-    priority: PriorityFilterType
+    priority: PriorityTypes
 }
 
 const initState: Array<TaskListType> = [

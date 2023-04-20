@@ -7,13 +7,13 @@ import {TaskListType} from "../../redux/reducers/tasks-lists-reducer";
 import {AddNewTasksList} from "./addNewTasksList/AddNewTasksList";
 import {CustomSearch} from "./search/CustomSearch";
 import {FilterBlock} from "./filterBlock/FilterBlock";
-import {PriorityFilterType} from "../../redux/reducers/filter-reducer";
+import {PriorityTypes} from "../../redux/reducers/filter-reducer";
 
 
 export const Sidebar = () => {
 
     const taskLists = useSelector<AppRootType, Array<TaskListType>>(state => state.taskLists)
-    const priorityFiltersArray = useSelector<AppRootType, Array<PriorityFilterType>>(state => state.filters.priorityFilter)
+    const priorityFiltersArray = useSelector<AppRootType, Array<PriorityTypes>>(state => state.filters.priorityFilter)
     const statusFilter = useSelector<AppRootType, boolean | null>(state => state.filters.statusFilter)
 
     const filterTasksLists = () => {

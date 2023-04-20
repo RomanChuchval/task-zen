@@ -1,0 +1,10 @@
+.add_task_form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.priority_selector{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

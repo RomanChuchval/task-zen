@@ -42,9 +42,8 @@ export const Task: FC<TaskPropsType> = memo((
             <div className={s.task}>
                 <div className={s.task_priority}>
                     <Badge color={badgeColor} text={taskData.priority}/>
-                    <button><EditOutlined/></button>
+                    <SuperButton btnType={'text'} btnSize={'small'}><EditOutlined/></SuperButton>
                 </div>
-
                 <div className={s.task_title}>{taskData.title}</div>
                 <div className={s.task_description}>{taskData.description}</div>
             </div>

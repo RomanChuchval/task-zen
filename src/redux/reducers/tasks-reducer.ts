@@ -8,21 +8,8 @@ import {
     TASK_LIST_ID5
 } from "./tasks-lists-reducer";
 import {v1} from "uuid";
+import {PriorityTypes} from "./filter-reducer";
 
-export type RootTasksStateType = {
-    [key: string]: Array<TasksStateType>
-}
-export type TasksStateType = {
-    id: string
-    title: string
-    isDone: boolean
-    description: string
-    priority: string
-}
-
-type ActionsType = ReturnType<typeof changeTaskStatusAC>
-    | ReturnType<typeof removeTaskAC>
-    | RemoveTasksListActionType
 
 const initState: RootTasksStateType = {
     [TASK_LIST_ID1]: [
@@ -158,7 +145,7 @@ const initState: RootTasksStateType = {
         }
     ],
 }
-export const tasksReducer = (state: RootTasksStateType = initState, action: ActionsType): RootTasksStateType => {
+export const tasksReducer = (state: RootTasksStateType = initState, action: TasksActionsTypes): RootTasksStateType => {
     switch (action.type) {
         case CHANGE_TASK_STATUS:
             return {
@@ -176,6 +163,15 @@ export const tasksReducer = (state: RootTasksStateType = initState, action: Acti
             let stateCopy = {...state}
             delete stateCopy[action.payload.id]
             return stateCopy
+        case CREATE_TASK:
+            const newTask = {
+                id: action.payload.taskId,
+                title: action.payload.data.taskTitle,
+                isDone: false,
+                description: action.payload.data.taskDescription,
+                priority: action.payload.data.taskPriority
+            }
+            return {...state, [action.payload.tasksListId]: [newTask, ...state[action.payload.tasksListId]]}
         default:
             return state
     }
@@ -183,6 +179,7 @@ export const tasksReducer = (state: RootTasksStateType = initState, action: Acti
 
 const CHANGE_TASK_STATUS = 'CHANGE_TASK_STATUS'
 const REMOVE_TASK = "REMOVE_TASK"
+const CREATE_TASK = "CREATE_TASK"
 export const changeTaskStatusAC = (newTaskStatus: boolean, tasksListId: string, taskId: string) => {
     return {
         type: CHANGE_TASK_STATUS,
@@ -203,3 +200,37 @@ export const removeTaskAC = (tasksListId: string, taskId: string) => {
         }
     } as const
 }
+
+export const createTaskAC = (tasksListId: string, data: CreateNewTaskDataType) => {
+    return {
+        type: CREATE_TASK,
+        payload: {
+            taskId: v1(),
+            tasksListId,
+            data
+        }
+    } as const
+}
+
+
+// TYPES
+export type RootTasksStateType = {
+    [key: string]: Array<TasksStateType>
+}
+export type CreateNewTaskDataType = {
+    taskTitle: string,
+    taskDescription: string,
+    taskPriority: PriorityTypes
+}
+export type TasksStateType = {
+    id: string
+    title: string
+    isDone: boolean
+    description: string
+    priority: PriorityTypes
+}
+
+type TasksActionsTypes = ReturnType<typeof changeTaskStatusAC>
+    | ReturnType<typeof removeTaskAC>
+    | RemoveTasksListActionType
+    | ReturnType<typeof createTaskAC>

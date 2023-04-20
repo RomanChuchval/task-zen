@@ -10,8 +10,7 @@ export const Header = () => {
     return (
         <div className={s.header_wrapper}>
             <div className={s.header_logo_title}>
-                <img className={s.app_logo} src={logo} alt=""/>
-                <span className={s.app_title}>Tasks Manager</span>
+                <img className={s.app_logo} src={logo} alt="logo"/>
             </div>
             <div className={s.header_login}>
                 <Badge count={9}>

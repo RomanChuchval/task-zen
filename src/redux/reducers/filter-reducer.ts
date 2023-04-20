@@ -1,9 +1,10 @@
 
 //========== TYPES ========== //
-export type PriorityFilterType = 'Low' | 'Medium' | 'High'
+export type PriorityTypes = 'Low' | 'Medium' | 'High'
+export type StatusFilterType = 'All' | 'Active' | 'Completed'
 
 export type InitFilterStateType = {
-    priorityFilter: Array<PriorityFilterType>
+    priorityFilter: Array<PriorityTypes>
     statusFilter: boolean | null
 }
 
@@ -42,7 +43,7 @@ const CHANGE_PRIORITY_FILTER = 'CHANGE_PRIORITY_FILTER'
 const CHANGE_STATUS_FILTER = 'CHANGE_STATUS_FILTER'
 const RESET_ALL_FILTERS = 'RESET_ALL_FILTERS'
 
-export const changePriorityFilterAC = (newFilterValue: PriorityFilterType) => {
+export const changePriorityFilterAC = (newFilterValue: PriorityTypes) => {
     return {
         type: CHANGE_PRIORITY_FILTER,
         payload: {
