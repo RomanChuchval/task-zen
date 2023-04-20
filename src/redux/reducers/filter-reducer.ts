@@ -1,7 +1,6 @@
 
 //========== TYPES ========== //
 export type PriorityTypes = 'Low' | 'Medium' | 'High'
-export type StatusFilterType = 'All' | 'Active' | 'Completed'
 
 export type InitFilterStateType = {
     priorityFilter: Array<PriorityTypes>
@@ -35,7 +34,6 @@ export const filterReducer = (state: InitFilterStateType = initFilterState, acti
         default: return state
     }
 }
-
 
 //========== ACTION CREATORS ========== //
 

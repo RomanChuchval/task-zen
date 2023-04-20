@@ -2,12 +2,14 @@ import {combineReducers, legacy_createStore} from "redux";
 import {tasksListsReducer} from "./reducers/tasks-lists-reducer";
 import {tasksReducer} from "./reducers/tasks-reducer";
 import {filterReducer} from "./reducers/filter-reducer";
+import {appReducer} from "./reducers/app-reducer";
 
 
 const rootReducer = combineReducers({
     taskLists: tasksListsReducer,
     tasks: tasksReducer,
-    filters: filterReducer
+    filters: filterReducer,
+    app: appReducer
 })
 
 export type AppRootType = ReturnType<typeof rootReducer>

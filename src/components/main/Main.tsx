@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from './Main.module.css'
 import {Task} from "./task/Task";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppRootType} from "../../redux/store";
 import {TasksStateType} from "../../redux/reducers/tasks-reducer";
 import {AppstoreAddOutlined, SortAscendingOutlined, FilterOutlined} from '@ant-design/icons';
@@ -11,10 +11,12 @@ import {Statistics} from "./statistics/Statistics";
 import {useParams} from "react-router-dom";
 import {Empty} from 'antd';
 import {AddTaskDrawer} from "./task/addTaskDrawer/AddTaskDrawer";
+import {toggleDrawerAC} from "../../redux/reducers/app-reducer";
 
 
 export const Main = () => {
-    const [openDrawer, setOpenDrawer] = useState<boolean>(false)
+    const isDrawerOpen = useSelector<AppRootType, boolean>(state => state.app.isDrawerOpen)
+    const dispatch = useDispatch()
     const {id} = useParams()
     const tasksListIdParams = id ? id : ''
 
@@ -36,7 +38,7 @@ export const Main = () => {
         : null
 
     const onOpenDrawerHandler = () => {
-        setOpenDrawer(true)
+        dispatch(toggleDrawerAC(true))
     }
 
     return (
@@ -68,7 +70,7 @@ export const Main = () => {
                     </div>
                 </div>
                 {tasks && <Statistics/> }
-                <AddTaskDrawer isOpen={openDrawer} onCloseCallback={setOpenDrawer} tasksListId={tasksListIdParams} />
+                <AddTaskDrawer isOpen={isDrawerOpen} tasksListId={tasksListIdParams} />
             </div>
         </div>
     );
