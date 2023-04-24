@@ -5,7 +5,7 @@ import {TaskListType} from "../../../redux/reducers/tasks-lists-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {
     changePriorityFilterAC,
-    changeStatusFilterAC, InitFilterStateType,
+    changeStatusFilterAC, FiltersGroupType,
     PriorityTypes,
     resetFiltersAC
 } from "../../../redux/reducers/filter-reducer";
@@ -17,7 +17,7 @@ type FilterBlockPropsType = {
 }
 
 export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
-    const filters = useSelector<AppRootType, InitFilterStateType>(state => state.filters)
+    const filters = useSelector<AppRootType, FiltersGroupType>(state => state.filters.tasksLists)
     const dispatch = useDispatch()
 
     // Counting buttons badges values //
@@ -35,13 +35,13 @@ export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
 
     // Set filters values //
     const setPriorityFilters = (newFilterValue: PriorityTypes) => {
-        dispatch(changePriorityFilterAC(newFilterValue))
+        dispatch(changePriorityFilterAC('tasksLists', newFilterValue))
     }
     const setStatusFilters = (newFilterValue: boolean | null) => {
-        dispatch(changeStatusFilterAC(newFilterValue))
+        dispatch(changeStatusFilterAC('tasksLists', newFilterValue))
     }
     const resetFilters = () => {
-        dispatch(resetFiltersAC())
+        dispatch(resetFiltersAC('tasksLists'))
     }
 
     // Display active filters //
@@ -50,8 +50,8 @@ export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
             : filters.isDoneFilter === false ? 'Active' : 'All'
         return [statusValue, ...filters.priorityFilter]
     }
-    const displayFiltersValues = filtersValues().map(value => {
 
+    const displayFiltersValues = filtersValues().map(value => {
         return <span key={v1()} className={s.filter_value}>
             <span>{value} </span>
         </span>
