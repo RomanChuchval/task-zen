@@ -1,20 +1,17 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from "./Statistics.module.css";
 import {Progress} from "antd";
-import {useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {AppRootType} from "../../../redux/store";
 import {TasksStateType} from "../../../redux/reducers/tasks-reducer";
 
-export const Statistics = () => {
+type StatisticsPropsType = {
+    tasks: TasksStateType[]
+}
 
-    const {id} = useParams()
-    const tasksListId = id ? id : ''
+export const Statistics: FC<StatisticsPropsType> = ({ tasks }) => {
 
-    const tasksArray = useSelector<AppRootType, Array<TasksStateType>>(state => state.tasks[tasksListId])
     const getCompletedProgressCount = () => {
-        const completedTasksCount = tasksArray.filter(t => t.isDone).length
-        const AllTasksCount = tasksArray.length
+        const completedTasksCount = tasks.filter(t => t.isDone).length
+        const AllTasksCount = tasks.length
         return Math.floor((completedTasksCount / AllTasksCount) * 100)
     }
     const progressPercent = getCompletedProgressCount()
