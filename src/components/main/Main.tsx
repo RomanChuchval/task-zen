@@ -13,6 +13,8 @@ import {Empty} from 'antd';
 import {AddEntityDrawer} from "./task/addEntityDrawer/AddEntityDrawer";
 import {toggleDrawerAC} from "../../redux/reducers/app-reducer";
 import {getTasksListTitle} from "../../utils/selectors/tasksListTitleSelector";
+import {filterData} from "../../utils/getFilteredData";
+import {PriorityTypes} from "../../redux/reducers/filter-reducer";
 
 export const Main = () => {
     const {id} = useParams()
@@ -20,14 +22,18 @@ export const Main = () => {
     const tasksListIdParams = id ? id : ''
     const isDrawerOpen = useSelector<AppRootType, boolean>(state => state.app.isDrawerOpen)
     const tasksArray = useSelector<AppRootType, Array<TasksStateType>>(state => state.tasks[tasksListIdParams])
-    const taskListTitle = useSelector<AppRootType, string | undefined>((state: AppRootType)=>
-        getTasksListTitle(state,tasksListIdParams))
+    const priorityFilters = useSelector<AppRootType, PriorityTypes[]>(state => state.filters.tasks.priorityFilter)
+    const statusFilter = useSelector<AppRootType, boolean | null>(state => state.filters.tasks.isDoneFilter)
+    const taskListTitle = useSelector<AppRootType, string | undefined>((state: AppRootType) =>
+        getTasksListTitle(state, tasksListIdParams))
+    const filteredTasks = filterData<TasksStateType>(tasksArray, priorityFilters, statusFilter)
 
     const tasks = tasksListIdParams && tasksArray.length
-        ? tasksArray.map(task => {
-        return (
-            <Task key={task.id} taskData={task} tasksListId={tasksListIdParams}/>
-        )})
+        ? filteredTasks.map(task => {
+            return (
+                <Task key={task.id} taskData={task} tasksListId={tasksListIdParams}/>
+            )
+        })
         : null
 
     const onOpenDrawerHandler = () => {
@@ -62,8 +68,8 @@ export const Main = () => {
                         {tasks ? tasks : <Empty description={'Tasks List is Empty!'}/>}
                     </div>
                 </div>
-                {tasks && <Statistics/> }
-                <AddEntityDrawer isOpen={isDrawerOpen} tasksListId={tasksListIdParams} />
+                {tasks && <Statistics tasks={filteredTasks}/>}
+                <AddEntityDrawer isOpen={isDrawerOpen} tasksListId={tasksListIdParams}/>
             </div>
         </div>
     );
