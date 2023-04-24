@@ -3,7 +3,7 @@ import s from './SidebarTask.module.css'
 import {Badge} from 'antd';
 import {changeTasksListStatusAC, removeTasksListAC, TaskListType} from "../../redux/reducers/tasks-lists-reducer";
 import {SuperCheckbox} from "../common/SuperCheckbox";
-import {NavLink, useMatch} from "react-router-dom";
+import {NavLink, useMatch, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {CheckboxChangeEvent} from "antd/es/checkbox";
 import {SuperButton} from "../common/SuperButton";
@@ -21,6 +21,7 @@ export const SidebarTask: FC<SidebarTaskPropsType> = (
 ) => {
     const dispatch = useDispatch()
     const match = useMatch(taskList.id)
+    const navigate = useNavigate()
     const getBadgeColor = () => {
         if (taskList.priority === 'High') {
             return '#f5222d'
@@ -39,6 +40,7 @@ export const SidebarTask: FC<SidebarTaskPropsType> = (
 
     const removeTasksListHandler = () => {
         dispatch(removeTasksListAC(taskList.id))
+        navigate('/')
     }
 
     return (
@@ -50,11 +52,9 @@ export const SidebarTask: FC<SidebarTaskPropsType> = (
                 </NavLink>
                 <div className={s.sidebar_task_status}>
                     <SuperCheckbox isChecked={taskList.isDone} callback={(e)=>onChangeHandler(e)}/>
-                    <NavLink to={'/'}>
                         <SuperButton btnType={'primary'} btnSize={'small'} callback={removeTasksListHandler} >
                             <DeleteOutlined />
                         </SuperButton>
-                    </NavLink>
                 </div>
                 <span className={s.sidebar_added_at}>Added at: {taskList.addedDate}</span>
             </div>
