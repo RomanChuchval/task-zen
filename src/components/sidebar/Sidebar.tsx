@@ -8,37 +8,19 @@ import {AddNewTasksList} from "./addNewTasksList/AddNewTasksList";
 import {CustomSearch} from "./search/CustomSearch";
 import {FilterBlock} from "./filterBlock/FilterBlock";
 import {PriorityTypes} from "../../redux/reducers/filter-reducer";
+import {filterData} from "../../utils/getFilteredData";
 
 
 export const Sidebar = () => {
-
     const taskLists = useSelector<AppRootType, Array<TaskListType>>((state) => state.taskLists)
-    const priorityFiltersArray = useSelector<AppRootType, Array<PriorityTypes>>(state => state.filters.priorityFilter)
-    const statusFilter = useSelector<AppRootType, boolean | null>(state => state.filters.isDoneFilter)
-
-    const filterTasksLists = () => {
-        let filteredTasksLists = taskLists
-        if(!priorityFiltersArray.length && statusFilter === null) {
-            return filteredTasksLists
-        } else {
-            if (statusFilter === null) {
-                filteredTasksLists = taskLists.filter(tl => priorityFiltersArray.includes(tl.priority))
-            } else if (!priorityFiltersArray.length) {
-                filteredTasksLists = taskLists.filter(el => el.isDone === statusFilter)
-            }
-            else {
-                let filteredForPriority: Array<TaskListType> = taskLists.filter(tl => priorityFiltersArray.includes(tl.priority))
-                filteredTasksLists = filteredForPriority.filter(el => el.isDone === statusFilter)
-            }
-        }
-        return filteredTasksLists
-    }
-    const tasksListsForRender = filterTasksLists()
+    const priorityFilters = useSelector<AppRootType, Array<PriorityTypes>>(state => state.filters.tasksLists.priorityFilter)
+    const statusFilter = useSelector<AppRootType, boolean | null>(state => state.filters.tasksLists.isDoneFilter)
+    const tasksListsForRender = filterData<TaskListType>(taskLists, priorityFilters, statusFilter)
 
 
     const sidebarTasksLists = tasksListsForRender.map(tl => {
         return (
-                <SidebarTask key={tl.id} taskList={tl}/>
+            <SidebarTask key={tl.id} taskList={tl}/>
         )
     })
 
