@@ -27,6 +27,7 @@ export const AddForm: FC<AddTaskFormPropsType> = ({tasksListId}) => {
     const {control, handleSubmit, reset, formState: {errors}} = useForm<Inputs>({
         mode: "all"
     });
+
     const formVariant = useSelector<AppRootType, DrawerVariantType>(state => state.app.formVariant)
     const dispatch = useDispatch()
 

@@ -5,13 +5,10 @@ import {Footer} from "./components/footer/Footer";
 import {Sidebar} from "./components/sidebar/Sidebar";
 import {Main} from "./components/main/Main";
 import {Route, Routes} from 'react-router-dom'
-import moment from "moment";
 
 
 
 export const App = () => {
-
-    console.log(moment().format('DD.MM.YYYY HH:mm'))
 
     return (
         <div className='App'>
@@ -25,6 +22,7 @@ export const App = () => {
                 <Routes>
                         <Route path={'/:id?'} element={<Main/>}/>
                         <Route index element={ <Main/> } />
+                        {/*<Route path={'*'} element={ <Main/> } />*/}
                 </Routes>
             </main>
             <footer className='Footer'>

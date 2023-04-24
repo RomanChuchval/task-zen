@@ -2,6 +2,7 @@ import {PriorityTypes} from "./filter-reducer";
 import {CreateNewEntityDataType} from "./tasks-reducer";
 import {v1} from "uuid";
 import moment from "moment/moment";
+
 //CONSTANTS
 export const TASK_LIST_ID1 = '1'
 export const TASK_LIST_ID2 = '2'
@@ -75,8 +76,9 @@ export const tasksListsReducer = (state: Array<TaskListType> = initState, action
                 addedDate: moment().format('DD.MM.YYYY HH:mm')
             }
             return [newTasksList, ...state]
+        default:
+            return state
     }
-    return state
 }
 
 

@@ -4,7 +4,7 @@ export type PriorityTypes = 'Low' | 'Medium' | 'High'
 
 export type InitFilterStateType = {
     priorityFilter: Array<PriorityTypes>
-    statusFilter: boolean | null
+    isDoneFilter: boolean | null
 }
 
 type ActionsTypes = ReturnType<typeof changePriorityFilterAC>
@@ -16,21 +16,21 @@ type ActionsTypes = ReturnType<typeof changePriorityFilterAC>
 
 const initFilterState: InitFilterStateType = {
     priorityFilter: [],
-    statusFilter: null
+    isDoneFilter: null
 }
-//
+
 export const filterReducer = (state: InitFilterStateType = initFilterState, action: ActionsTypes): InitFilterStateType => {
     switch (action.type) {
         case CHANGE_PRIORITY_FILTER:
             return {...state, priorityFilter:
                     state.priorityFilter.includes(action.payload.newFilterValue)
-                    ? state.priorityFilter
+                    ? state.priorityFilter.filter(f => f !== action.payload.newFilterValue)
                     : [...state.priorityFilter, action.payload.newFilterValue]
                     }
         case CHANGE_STATUS_FILTER:
-            return {...state, statusFilter: action.payload.newFilterValue}
+            return {...state, isDoneFilter: action.payload.newFilterValue}
         case RESET_ALL_FILTERS:
-            return {...state, priorityFilter: [], statusFilter: null}
+            return {...state, priorityFilter: [], isDoneFilter: null}
         default: return state
     }
 }

@@ -46,22 +46,21 @@ export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
 
     // Display active filters //
     const filtersValues = () => {
-        let statusValue = filters.statusFilter === true ? 'Completed'
-            : filters.statusFilter === false ? 'Active' : 'All'
+        let statusValue = filters.isDoneFilter === true ? 'Completed'
+            : filters.isDoneFilter === false ? 'Active' : 'All'
         return [statusValue, ...filters.priorityFilter]
     }
     const displayFiltersValues = filtersValues().map(value => {
 
         return <span key={v1()} className={s.filter_value}>
             <span>{value} </span>
-            {/*<SuperButton btnType={"default"} btnSize={"small"} shape={"circle"}>x</SuperButton>*/}
         </span>
     })
 
     return (
         <>
             <div className={s.reset_filter}>
-                <SuperButton btnSize={'small'} btnType={"default"} callback={resetFilters}>Reset</SuperButton>
+                <SuperButton btnSize={'small'} btnType={"default"} callback={resetFilters}>Clear filters</SuperButton>
             </div>
             <div className={s.filters_values}>
                 {displayFiltersValues}
@@ -69,29 +68,29 @@ export const FilterBlock: FC<FilterBlockPropsType> = memo(({tasksLists}) => {
             <div className={s.sidebar_filter}>
                 <SuperButton btnSize={"small"} btnType={"primary"} callback={() => setPriorityFilters('Low')}
                              badgeSize={"small"} badgeCount={lowPriorityCount} btnColor={"#52c41a"} withBadge={true}>
-                    Low
+                    Low {filters.priorityFilter.includes('Low') && '✓'}
                 </SuperButton>
                 <SuperButton btnSize={"small"} btnType={"primary"} callback={() => setPriorityFilters('Medium')}
                              badgeSize={"small"} badgeCount={middlePriorityCount} btnColor={"#faad14"} withBadge={true}>
-                    Medium
+                    Medium {filters.priorityFilter.includes('Medium') && '✓'}
                 </SuperButton>
                 <SuperButton btnSize={"small"} btnType={"primary"} callback={() => setPriorityFilters('High')}
                              badgeSize={"small"} badgeCount={highPriorityCount} btnColor={"#f5222d"} withBadge={true}>
-                    High
+                    High {filters.priorityFilter.includes('High') && '✓'}
                 </SuperButton>
             </div>
             <div className={s.sidebar_filter}>
                 <SuperButton btnSize={"small"} btnType={"primary"} callback={() => setStatusFilters(null)}
                              badgeSize={"small"} badgeCount={allTasksListCount} withBadge={true}>
-                    All
+                    All {filters.isDoneFilter === null && '✓'}
                 </SuperButton>
                 <SuperButton btnSize={"small"} btnType={"primary"} callback={() => setStatusFilters(false)}
                              badgeSize={"small"} badgeCount={activeTasksListCount} withBadge={true}>
-                    Active
+                    Active {filters.isDoneFilter === false && '✓'}
                 </SuperButton>
                 <SuperButton btnSize={"small"} btnType={"primary"} callback={() => setStatusFilters(true)}
                              badgeSize={"small"} badgeCount={doneTasksListCount} withBadge={true}>
-                    Completed
+                    Completed {filters.isDoneFilter === true && '✓'}
                 </SuperButton>
             </div>
         </>

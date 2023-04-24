@@ -14,7 +14,6 @@ import {AddEntityDrawer} from "./task/addEntityDrawer/AddEntityDrawer";
 import {toggleDrawerAC} from "../../redux/reducers/app-reducer";
 import {getTasksListTitle} from "../../utils/selectors/tasksListTitleSelector";
 
-
 export const Main = () => {
     const {id} = useParams()
     const dispatch = useDispatch()

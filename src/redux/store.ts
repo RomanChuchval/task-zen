@@ -12,8 +12,8 @@ const rootReducer = combineReducers({
     filters: filterReducer,
     app: appReducer
 })
-
 export const store = legacy_createStore(rootReducer, loadState())
+
 
 store.subscribe(() => {
     saveState({
