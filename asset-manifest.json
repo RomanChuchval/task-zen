@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/tasks-manager/static/css/main.196ee169.css",
-    "main.js": "/tasks-manager/static/js/main.c6610212.js",
-    "static/js/787.5d927fb4.chunk.js": "/tasks-manager/static/js/787.5d927fb4.chunk.js",
-    "static/media/2023-03-20 16.14.05.jpg": "/tasks-manager/static/media/2023-03-20 16.14.05.41e0584ec971e302afe2.jpg",
-    "index.html": "/tasks-manager/index.html",
-    "main.196ee169.css.map": "/tasks-manager/static/css/main.196ee169.css.map",
-    "main.c6610212.js.map": "/tasks-manager/static/js/main.c6610212.js.map",
-    "787.5d927fb4.chunk.js.map": "/tasks-manager/static/js/787.5d927fb4.chunk.js.map"
+    "main.css": "/task-zen/static/css/main.047e38d7.css",
+    "main.js": "/task-zen/static/js/main.7efe82d5.js",
+    "static/js/787.d4008628.chunk.js": "/task-zen/static/js/787.d4008628.chunk.js",
+    "static/media/2023-03-20 16.14.05.jpg": "/task-zen/static/media/2023-03-20 16.14.05.41e0584ec971e302afe2.jpg",
+    "index.html": "/task-zen/index.html",
+    "main.047e38d7.css.map": "/task-zen/static/css/main.047e38d7.css.map",
+    "main.7efe82d5.js.map": "/task-zen/static/js/main.7efe82d5.js.map",
+    "787.d4008628.chunk.js.map": "/task-zen/static/js/787.d4008628.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.196ee169.css",
-    "static/js/main.c6610212.js"
+    "static/css/main.047e38d7.css",
+    "static/js/main.7efe82d5.js"
   ]
 }
