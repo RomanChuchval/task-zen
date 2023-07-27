@@ -1,5 +1,5 @@
 import React, {memo} from 'react';
-import s from "./CustomSearch.module.css";
+import s from "common/components/sidebar/search/CustomSearch.module.css";
 import Search from "antd/es/input/Search";
 
 export const CustomSearch = memo(() => {

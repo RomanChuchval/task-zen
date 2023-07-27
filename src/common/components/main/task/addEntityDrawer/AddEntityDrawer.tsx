@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import {Button, Drawer, Space} from "antd";
-import {AddForm} from "./AddForm";
+import {AddForm} from "common/components/main/task/addEntityDrawer/AddForm";
 import {useDispatch, useSelector} from "react-redux";
-import {DrawerVariantType, toggleDrawerAC} from "../../../../redux/reducers/app-reducer";
-import {AppRootType} from "../../../../redux/store";
+import {DrawerVariantType, toggleDrawerAC} from "redux/reducers/app-reducer";
+import {AppRootType} from "redux/store";
 
 
 type AddTaskDrawerType = {

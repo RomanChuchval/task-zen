@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
-import s from './SidebarTask.module.css'
+import s from 'common/components/sidebar/SidebarTask.module.css'
 import {Badge} from 'antd';
-import {changeTasksListStatusAC, removeTasksListAC, TaskListType} from "../../redux/reducers/tasks-lists-reducer";
-import {SuperCheckbox} from "../common/SuperCheckbox";
+import {changeTasksListStatusAC, removeTasksListAC, TaskListType} from "redux/reducers/tasks-lists-reducer";
+import {SuperCheckbox} from "common/components/CustomCheckbox/SuperCheckbox";
 import {NavLink, useMatch, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {CheckboxChangeEvent} from "antd/es/checkbox";
-import {SuperButton} from "../common/SuperButton";
+import {SuperButton} from "common/components/CustomButton/SuperButton";
 import {DeleteOutlined} from "@ant-design/icons";
 
 

@@ -1,8 +1,8 @@
 import React, {memo} from 'react';
-import s from "./AddNewTasksList.module.css";
-import {SuperButton} from "../../common/SuperButton";
+import s from "common/components/sidebar/addNewTasksList/AddNewTasksList.module.css";
+import {SuperButton} from "common/components/CustomButton/SuperButton";
 import {useDispatch} from "react-redux";
-import {toggleDrawerAC} from "../../../redux/reducers/app-reducer";
+import {toggleDrawerAC} from "redux/reducers/app-reducer";
 
 export const AddNewTasksList = memo(() => {
     const dispatch = useDispatch()

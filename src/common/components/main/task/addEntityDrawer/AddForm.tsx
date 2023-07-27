@@ -1,17 +1,17 @@
 import React, {FC} from 'react';
 import Input from "antd/lib/input/Input";
 import TextArea from "antd/lib/input/TextArea";
-import s from './AddTaskForm.module.css'
+import s from 'common/components/main/task/addEntityDrawer/AddTaskForm.module.css'
 import Radio from 'antd/lib/radio';
 import Divider from "antd/lib/divider";
 import {Controller, SubmitHandler, useForm} from "react-hook-form";
-import {PriorityTypes} from "../../../../redux/reducers/filter-reducer";
+import {PriorityTypes} from "redux/reducers/filter-reducer";
 import {Button} from "antd";
-import {createTaskAC} from "../../../../redux/reducers/tasks-reducer";
+import {createTaskAC} from "redux/reducers/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootType} from "../../../../redux/store";
-import {DrawerVariantType, toggleDrawerAC} from "../../../../redux/reducers/app-reducer";
-import {createTasksListAC} from "../../../../redux/reducers/tasks-lists-reducer";
+import {AppRootType} from "redux/store";
+import {DrawerVariantType, toggleDrawerAC} from "redux/reducers/app-reducer";
+import {createTasksListAC} from "redux/reducers/tasks-lists-reducer";
 
 
 type AddTaskFormPropsType = {

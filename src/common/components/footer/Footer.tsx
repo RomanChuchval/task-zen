@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './Footer.module.css'
+import s from 'common/components/footer/Footer.module.css'
 import {GithubOutlined, InstagramOutlined, FacebookOutlined, TwitterOutlined, LinkedinOutlined} from '@ant-design/icons';
 
 export const Footer = () => {

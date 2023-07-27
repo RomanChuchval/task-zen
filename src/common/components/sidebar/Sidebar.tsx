@@ -1,14 +1,14 @@
 import React from 'react';
-import s from './Sidebar.module.css'
-import {SidebarTask} from "./SidebarTask";
+import s from 'common/components/sidebar/Sidebar.module.css'
+import {SidebarTask} from "common/components/sidebar/SidebarTask";
 import {useSelector} from "react-redux";
-import {AppRootType} from "../../redux/store";
-import {TaskListType} from "../../redux/reducers/tasks-lists-reducer";
-import {AddNewTasksList} from "./addNewTasksList/AddNewTasksList";
-import {CustomSearch} from "./search/CustomSearch";
-import {FilterBlock} from "./filterBlock/FilterBlock";
-import {PriorityTypes} from "../../redux/reducers/filter-reducer";
-import {filterData} from "../../utils/getFilteredData";
+import {AppRootType} from "redux/store";
+import {TaskListType} from "redux/reducers/tasks-lists-reducer";
+import {AddNewTasksList} from "common/components/sidebar/addNewTasksList/AddNewTasksList";
+import {CustomSearch} from "common/components/sidebar/search/CustomSearch";
+import {FilterBlock} from "common/components/sidebar/filterBlock/FilterBlock";
+import {PriorityTypes} from "redux/reducers/filter-reducer";
+import {filterData} from "utils/getFilteredData";
 
 
 export const Sidebar = () => {

@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/header/Header";
-import {Footer} from "./components/footer/Footer";
-import {Sidebar} from "./components/sidebar/Sidebar";
-import {Main} from "./components/main/Main";
+import {Header} from "common/components/header/Header";
+import {Footer} from "common/components/footer/Footer";
+import {Sidebar} from "common/components/sidebar/Sidebar";
+import {Main} from "common/components/main/Main";
 import {Route, Routes} from 'react-router-dom'
 
 
@@ -22,7 +22,6 @@ export const App = () => {
                 <Routes>
                         <Route path={'/:id?'} element={<Main/>}/>
                         <Route index element={ <Main/> } />
-                        {/*<Route path={'*'} element={ <Main/> } />*/}
                 </Routes>
             </main>
             <footer className='Footer'>

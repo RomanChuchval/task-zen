@@ -3,7 +3,7 @@ import {tasksListsReducer} from "./reducers/tasks-lists-reducer";
 import {tasksReducer} from "./reducers/tasks-reducer";
 import {filterReducer} from "./reducers/filter-reducer";
 import {appReducer} from "./reducers/app-reducer";
-import {loadState, saveState} from "../utils/localstorage-util";
+import {loadState, saveState} from "utils/localstorage-util";
 
 
 const rootReducer = combineReducers({

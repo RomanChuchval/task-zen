@@ -1,15 +1,15 @@
 import React, {FC, memo} from 'react';
-import {SuperButton} from "../../common/SuperButton";
-import s from "./FilterBlock.module.css";
-import {TaskListType} from "../../../redux/reducers/tasks-lists-reducer";
+import {SuperButton} from "common/components/CustomButton/SuperButton";
+import s from "common/components/sidebar/filterBlock/FilterBlock.module.css";
+import {TaskListType} from "redux/reducers/tasks-lists-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {
     changePriorityFilterAC,
     changeStatusFilterAC, FiltersGroupType,
     PriorityTypes,
     resetFiltersAC
-} from "../../../redux/reducers/filter-reducer";
-import {AppRootType} from "../../../redux/store";
+} from "redux/reducers/filter-reducer";
+import {AppRootType} from "redux/store";
 import {v1} from "uuid";
 
 type FilterBlockPropsType = {

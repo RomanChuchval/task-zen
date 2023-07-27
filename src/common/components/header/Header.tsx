@@ -1,7 +1,7 @@
 import React from 'react';
-import s from './Header.module.css'
-import logo from '../../assets/logo.png'
-import avatar from '../../assets/2023-03-20 16.14.05.jpg'
+import s from 'common/components/header/Header.module.css'
+import logo from 'assets/logo.png'
+import avatar from 'assets/2023-03-20 16.14.05.jpg'
 import {Button} from 'antd';
 import {LogoutOutlined, MessageOutlined} from '@ant-design/icons';
 import {Avatar, Badge} from 'antd';

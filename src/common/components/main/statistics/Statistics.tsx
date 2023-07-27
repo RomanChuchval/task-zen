@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import s from "./Statistics.module.css";
+import s from "common/components/main/statistics/Statistics.module.css";
 import {Progress} from "antd";
-import {TasksStateType} from "../../../redux/reducers/tasks-reducer";
+import {TasksStateType} from "redux/reducers/tasks-reducer";
 
 type StatisticsPropsType = {
     tasks: TasksStateType[]

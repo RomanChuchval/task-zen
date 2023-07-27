@@ -1,20 +1,20 @@
 import React from 'react';
-import s from './Main.module.css'
-import {Task} from "./task/Task";
+import s from 'common/components/main/Main.module.css'
+import {Task} from "common/components/main/task/Task";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootType} from "../../redux/store";
-import {TasksStateType} from "../../redux/reducers/tasks-reducer";
+import {AppRootType} from "redux/store";
+import {TasksStateType} from "redux/reducers/tasks-reducer";
 import {AppstoreAddOutlined, SortAscendingOutlined, FilterOutlined} from '@ant-design/icons';
-import {SuperButton} from "../common/SuperButton";
-import {MembersAvatars} from "./members-avatars/MembersAvatars";
-import {Statistics} from "./statistics/Statistics";
+import {SuperButton} from "common/components/CustomButton/SuperButton";
+import {MembersAvatars} from "common/components/main/members-avatars/MembersAvatars";
+import {Statistics} from "common/components/main/statistics/Statistics";
 import {useParams} from "react-router-dom";
 import {Empty} from 'antd';
-import {AddEntityDrawer} from "./task/addEntityDrawer/AddEntityDrawer";
-import {toggleDrawerAC} from "../../redux/reducers/app-reducer";
-import {getTasksListTitle} from "../../utils/selectors/tasksListTitleSelector";
-import {filterData} from "../../utils/getFilteredData";
-import {PriorityTypes} from "../../redux/reducers/filter-reducer";
+import {AddEntityDrawer} from "common/components/main/task/addEntityDrawer/AddEntityDrawer";
+import {toggleDrawerAC} from "redux/reducers/app-reducer";
+import {getTasksListTitle} from "utils/selectors/tasksListTitleSelector";
+import {filterData} from "utils/getFilteredData";
+import {PriorityTypes} from "redux/reducers/filter-reducer";
 
 export const Main = () => {
     const {id} = useParams()

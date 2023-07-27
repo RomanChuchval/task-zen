@@ -1,12 +1,12 @@
 import React, {FC, memo} from 'react';
-import s from './Task.module.css'
-import {SuperCheckbox} from "../../common/SuperCheckbox";
-import {changeTaskStatusAC, removeTaskAC, TasksStateType} from "../../../redux/reducers/tasks-reducer";
+import s from 'common/components/main/task/Task.module.css'
+import {SuperCheckbox} from "common/components/CustomCheckbox/SuperCheckbox";
+import {changeTaskStatusAC, removeTaskAC, TasksStateType} from "redux/reducers/tasks-reducer";
 import {Badge} from 'antd';
 import {DeleteOutlined, EditOutlined} from '@ant-design/icons';
 import {CheckboxChangeEvent} from "antd/es/checkbox";
 import {useDispatch} from "react-redux";
-import {SuperButton} from "../../common/SuperButton";
+import {SuperButton} from "common/components/CustomButton/SuperButton";
 
 type TaskPropsType = {
     taskData: TasksStateType
